@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CleanPro Supplies — Chemical & Cleaning Products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f5f7fa;
+      --white:#ffffff;
+      --navy:#0f1e36;
+      --teal:#007a6e;
+      --teal-light:#e6f4f2;
+      --teal-mid:#b2ddd8;
+      --accent:#ff6b35;
+      --text:#1a2332;
+      --muted:#6b7a8d;
+      --border:#e2e8f0;
+      --card:#ffffff;
+      --shadow:0 2px 12px rgba(15,30,54,.08);
+      --shadow-hover:0 8px 32px rgba(15,30,54,.14);
+      --badge:#fff3ed;
+      --badge-text:#e05a1a;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+    /* ── TOP BAR ── */
+    .topbar{background:var(--navy);color:#fff;font-size:.72rem;letter-spacing:.05em;padding:6px 32px;display:flex;justify-content:space-between;align-items:center}
+    .topbar span{opacity:.7}
+    .topbar strong{color:#4dd9cc;opacity:1}
+
+    /* ── NAVBAR ── */
+    nav{
+      background:var(--white);
+      border-bottom:1px solid var(--border);
+      padding:0 32px;
+      display:flex;
+      align-items:center;
+      gap:24px;
+      height:68px;
+      position:sticky;top:0;z-index:100;
+      box-shadow:0 1px 8px rgba(0,0,0,.06);
+    }
+    .nav-logo{
+      font-family:'Fraunces',serif;
+      font-size:1.5rem;
+      font-weight:700;
+      color:var(--navy);
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+    .nav-logo span{color:var(--teal)}
+    .search-wrap{
+      flex:1;
+      max-width:560px;
+      position:relative;
+    }
+    .search-wrap input{
+      width:100%;
+      padding:10px 44px 10px 18px;
+      border:1.5px solid var(--border);
+      border-radius:10px;
+      font-family:'Sora',sans-serif;
+      font-size:.88rem;
+      color:var(--text);
+      background:var(--bg);
+      outline:none;
+      transition:border-color .2s;
+    }
+    .search-wrap input:focus{border-color:var(--teal);background:#fff}
+    .search-wrap svg{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+    .nav-count{
+      background:var(--teal-light);
+      color:var(--teal);
+      font-size:.75rem;
+      font-weight:600;
+      padding:5px 14px;
+      border-radius:50px;
+      white-space:nowrap;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero{
+      background:linear-gradient(120deg,var(--navy) 0%,#0e2d45 60%,#0a3d35 100%);
+      padding:52px 32px 52px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:32px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(0,180,160,.15),transparent);
+    }
+    .hero-text{position:relative;z-index:1}
+    .hero-eyebrow{
+      display:inline-block;
+      background:rgba(77,217,204,.15);
+      color:#4dd9cc;
+      border:1px solid rgba(77,217,204,.3);
+      font-size:.72rem;font-weight:600;
+      letter-spacing:.15em;text-transform:uppercase;
+      padding:5px 16px;border-radius:50px;margin-bottom:18px;
+    }
+    .hero h1{
+      font-family:'Fraunces',serif;
+      font-size:clamp(1.8rem,3.5vw,3rem);
+      font-weight:700;color:#fff;
+      line-height:1.15;margin-bottom:14px;
+    }
+    .hero h1 em{font-style:italic;color:#4dd9cc}
+    .hero p{color:rgba(255,255,255,.6);font-size:.9rem;max-width:400px;line-height:1.7}
+    .hero-stats{
+      display:flex;gap:28px;margin-top:28px;position:relative;z-index:1;
+    }
+    .stat{text-align:center}
+    .stat-num{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;color:#4dd9cc}
+    .stat-label{font-size:.7rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+    .hero-icons{
+      display:grid;grid-template-columns:repeat(3,72px);
+      grid-template-rows:repeat(2,72px);gap:12px;
+      position:relative;z-index:1;flex-shrink:0;
+    }
+    .hero-icon-card{
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      gap:4px;
+      font-size:1.6rem;
+      transition:background .2s;
+    }
+    .hero-icon-card span{font-size:.55rem;color:rgba(255,255,255,.5);text-align:center}
+
+    /* ── LAYOUT ── */
+    .layout{display:flex;gap:0;max-width:1400px;margin:0 auto;padding:28px 32px 60px;}
+
+    /* ── SIDEBAR ── */
+    aside{
+      width:230px;flex-shrink:0;margin-right:28px;
+    }
+    .sidebar-sticky{position:sticky;top:88px;}
+    .sidebar-title{
+      font-size:.7rem;font-weight:600;
+      letter-spacing:.15em;text-transform:uppercase;
+      color:var(--muted);margin-bottom:12px;padding-left:4px;
+    }
+    .cat-list{display:flex;flex-direction:column;gap:4px;margin-bottom:28px;}
+    .cat-btn{
+      display:flex;align-items:center;gap:12px;
+      padding:11px 14px;border-radius:10px;
+      border:none;background:transparent;
+      font-family:'Sora',sans-serif;font-size:.85rem;
+      color:var(--muted);cursor:pointer;
+      transition:all .18s;text-align:left;width:100%;
+    }
+    .cat-btn:hover{background:var(--teal-light);color:var(--teal)}
+    .cat-btn.active{background:var(--teal);color:#fff}
+    .cat-btn .cat-icon{font-size:1.1rem;flex-shrink:0;width:24px;text-align:center}
+    .cat-btn .cat-count{
+      margin-left:auto;
+      background:rgba(0,0,0,.08);
+      font-size:.65rem;font-weight:600;
+      padding:2px 7px;border-radius:50px;
+    }
+    .cat-btn.active .cat-count{background:rgba(255,255,255,.25);color:#fff}
+
+    /* ── MAIN ── */
+    main{flex:1;min-width:0}
+
+    /* ── CATEGORY SECTION HEADER ── */
+    .section-head{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:18px;padding-bottom:14px;
+      border-bottom:2px solid var(--border);
+    }
+    .section-head-left{display:flex;align-items:center;gap:12px}
+    .section-head-icon{
+      width:42px;height:42px;
+      background:var(--teal-light);
+      border-radius:10px;
+      display:grid;place-items:center;
+      font-size:1.2rem;
+    }
+    .section-head h2{font-size:1.15rem;font-weight:600;color:var(--navy)}
+    .section-head .cat-num{
+      font-size:.72rem;color:var(--muted);font-weight:400;margin-top:1px;
+    }
+    .section-badge{
+      background:var(--teal-light);
+      color:var(--teal);
+      font-size:.72rem;font-weight:600;
+      padding:4px 12px;border-radius:50px;
+    }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(165px,1fr));
+      gap:14px;
+      margin-bottom:44px;
+    }
+
+    .prod-card{
+      background:var(--card);
+      border:1.5px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      transition:box-shadow .2s,transform .2s,border-color .2s;
+      cursor:default;
+      position:relative;
+    }
+    .prod-card:hover{
+      box-shadow:var(--shadow-hover);
+      transform:translateY(-3px);
+      border-color:var(--teal-mid);
+    }
+
+    .prod-img{
+      background:var(--teal-light);
+      height:110px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:2.6rem;
+      position:relative;
+    }
+    .prod-num-badge{
+      position:absolute;top:8px;left:8px;
+      background:var(--navy);color:#fff;
+      font-size:.6rem;font-weight:600;
+      padding:3px 8px;border-radius:6px;
+    }
+
+    .prod-info{padding:12px 13px 13px}
+    .prod-name{
+      font-size:.82rem;font-weight:500;
+      line-height:1.4;color:var(--text);
+      min-height:2.2em;
+    }
+    .prod-cat-tag{
+      display:inline-block;margin-top:8px;
+      background:var(--teal-light);color:var(--teal);
+      font-size:.62rem;font-weight:600;
+      padding:3px 8px;border-radius:50px;
+      letter-spacing:.03em;
+    }
+    .prod-card.hidden{display:none}
+
+    /* ── EMPTY STATE ── */
+    .empty{
+      text-align:center;padding:80px 24px;
+      color:var(--muted);
+    }
+    .empty-icon{font-size:3rem;margin-bottom:12px}
+    .empty p{font-size:.9rem}
+
+    /* ── FOOTER ── */
+    footer{
+      background:var(--navy);color:rgba(255,255,255,.5);
+      text-align:center;padding:28px 32px;
+      font-size:.78rem;line-height:1.8;
+    }
+    footer strong{color:#4dd9cc}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .hero-icons{display:none}
+      aside{width:200px}
+    }
+    @media(max-width:700px){
+      .layout{flex-direction:column;padding:16px 16px 40px}
+      aside{width:100%;margin-right:0;margin-bottom:16px}
+      .sidebar-sticky{position:static}
+      .cat-list{flex-direction:row;flex-wrap:wrap}
+      .cat-btn{width:auto;flex-direction:column;gap:4px;padding:10px 12px;font-size:.72rem}
+      .cat-btn .cat-count{display:none}
+      nav{padding:0 16px;gap:12px}
+      .topbar{display:none}
+      .hero{padding:32px 16px}
+      .hero-stats{gap:16px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>Professional Cleaning &amp; Hygiene Supplies</span>
+  <span>For orders &amp; enquiries — <strong>Contact Us</strong></span>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Clean<span>Pro</span></div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search products e.g. mop, brush, tissue..."/>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  <div class="nav-count" id="totalCount">74 Products</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Official Product Catalog</div>
+    <h1>Floor Cleaning &amp;<br><em>Chemical Supplies</em></h1>
+    <p>Complete range of professional-grade cleaning products, hygiene essentials, and facility management solutions.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">74</div><div class="stat-label">Products</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Categories</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Professional</div></div>
+    </div>
+  </div>
+  <div class="hero-icons">
+    <div class="hero-icon-card">🧹<span>Mop</span></div>
+    <div class="hero-icon-card">🪣<span>Brush</span></div>
+    <div class="hero-icon-card">🚿<span>Bath</span></div>
+    <div class="hero-icon-card">🧤<span>Gloves</span></div>
+    <div class="hero-icon-card">⭐<span>Special</span></div>
+    <div class="hero-icon-card">🧪<span>Taski</span></div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="sidebar-sticky">
+      <div class="sidebar-title">Browse Categories</div>
+      <div class="cat-list" id="catList">
+        <button class="cat-btn active" onclick="filterCat('all',this)">
+          <span class="cat-icon">🏠</span> All Products
+          <span class="cat-count">74</span>
+        </button>
+        <button class="cat-btn" onclick="filterCat('mop',this)">
+          <span class="cat-icon">🧹</span> Floor Cleaning Mop
+          <span class="cat-count">10</span>
+        </button>
+        <button class="cat-btn" onclick="filterCat('brush',this)">
+          <span class="cat-icon">🪣</span> Brushes &amp; Wipers
+          <span class="cat-count">13</span>
+        </button>
+        <button class="cat-btn" onclick="filterCat('bathroom',this)">
+          <span class="cat-icon">🚿</span> Bathroom
+          <span class="cat-count">25</span>
+        </button>
+        <button class="cat-btn" onclick="filterCat('essential',this)">
+          <span class="cat-icon">🧤</span> Essentials
+          <span class="cat-count">12</span>
+        </button>
+        <button class="cat-btn" onclick="filterCat('special',this)">
+          <span class="cat-icon">⭐</span> Special Request
+          <span class="cat-count">18</span>
+        </button>
+        <button class="cat-btn" onclick="filterCat('taski',this)">
+          <span class="cat-icon">🧪</span> Taski Chemical
+          <span class="cat-count">6</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PRODUCTS -->
+  <main id="mainContent">
+
+    <!-- SECTION: MOP -->
+    <div class="cat-section" data-cat="mop">
+      <div class="section-head">
+        <div class="section-head-left">
+          <div class="section-head-icon">🧹</div>
+          <div>
+            <h2>Floor Cleaning Mop</h2>
+            <div class="cat-num">Category 01</div>
+          </div>
+        </div>
+        <span class="section-badge">10 Products</span>
+      </div>
+      <div class="product-grid" id="mop-grid"></div>
+    </div>
+
+    <!-- SECTION: BRUSHES -->
+    <div class="cat-section" data-cat="brush">
+      <div class="section-head">
+        <div class="section-head-left">
+          <div class="section-head-icon">🪣</div>
+          <div>
+            <h2>Brushes &amp; Wiper / Squeeze</h2>
+            <div class="cat-num">Category 02</div>
+          </div>
+        </div>
+        <span class="section-badge">13 Products</span>
+      </div>
+      <div class="product-grid" id="brush-grid"></div>
+    </div>
+
+    <!-- SECTION: BATHROOM -->
+    <div class="cat-section" data-cat="bathroom">
+      <div class="section-head">
+        <div class="section-head-left">
+          <div class="section-head-icon">🚿</div>
+          <div>
+            <h2>Bathroom Commodities</h2>
+            <div class="cat-num">Category 03</div>
+          </div>
+        </div>
+        <span class="section-badge">25 Products</span>
+      </div>
+      <div class="product-grid" id="bathroom-grid"></div>
+    </div>
+
+    <!-- SECTION: ESSENTIAL -->
+    <div class="cat-section" data-cat="essential">
+      <div class="section-head">
+        <div class="section-head-left">
+          <div class="section-head-icon">🧤</div>
+          <div>
+            <h2>Essential Commodities</h2>
+            <div class="cat-num">Category 04</div>
+          </div>
+        </div>
+        <span class="section-badge">12 Products</span>
+      </div>
+      <div class="product-grid" id="essential-grid"></div>
+    </div>
+
+    <!-- SECTION: SPECIAL -->
+    <div class="cat-section" data-cat="special">
+      <div class="section-head">
+        <div class="section-head-left">
+          <div class="section-head-icon">⭐</div>
+          <div>
+            <h2>Special Request</h2>
+            <div class="cat-num">Category 05</div>
+          </div>
+        </div>
+        <span class="section-badge">18 Products</span>
+      </div>
+      <div class="product-grid" id="special-grid"></div>
+    </div>
+
+    <!-- SECTION: TASKI -->
+    <div class="cat-section" data-cat="taski">
+      <div class="section-head">
+        <div class="section-head-left">
+          <div class="section-head-icon">🧪</div>
+          <div>
+            <h2>Taski Chemical</h2>
+            <div class="cat-num">Category 06</div>
+          </div>
+        </div>
+        <span class="section-badge">6 Products</span>
+      </div>
+      <div class="product-grid" id="taski-grid"></div>
+    </div>
+
+    <div class="empty" id="emptyState" style="display:none">
+      <div class="empty-icon">🔍</div>
+      <p>No products found for your search.</p>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p><strong>CleanPro Supplies</strong> — Professional Cleaning &amp; Hygiene Products</p>
+  <p>For bulk orders and enquiries, please contact us directly.</p>
+</footer>
+
+<script>
+const catalog = {
+  mop: {
+    icon: '🧹',
+    label: 'Floor Mop',
+    items: [
+      "Wet Mop Round Set","Wet Mop Round","Metal Clip",
+      "Dry Mop Set (1.5 Feet) White","Round Wet Mop Set",
+      "Dry Mop Set (2 Feet) White","Clip Mop Set",
+      "Dry Mop Set (1.5 Feet) Blue","Clip Mop Refill","Dry Mop Set (2 Feet)"
+    ]
+  },
+  brush: {
+    icon: '🪣',
+    label: 'Brush & Wiper',
+    items: [
+      "Floor Wiper (Plastic)","1/4 Floor Wiper",
+      "Aluminium Floor Wiper (1.5 Feet)","Aluminium Floor Wiper (2 Feet)",
+      "Steel Glass Wiper","Basin Wiper","Glass Combi","Glass Washer",
+      "Round Toilet Brush","Hockey Toilet Brush","Basin Brush","T-Brush","Feather Brush"
+    ]
+  },
+  bathroom: {
+    icon: '🚿',
+    label: 'Bathroom',
+    items: [
+      "Chockup Butch","Toilet Mask","Dettol Handwash","Handwash Fem",
+      "Ordinary Handwash","Odonil (50gm)","Sani Cubes","N. Balls",
+      "Urine Screen","Garbage Bag (19×21)","Garbage Bag (29×39)",
+      "Garbage Bag Origin (19×21)","Garbage Bag Origin (29×39)",
+      "Garbage Bag Origin (30×50)","Tissue Roll (50gm)","Tissue Roll (100gm)",
+      "Tissue Roll (150gm)","Tissue Roll (200gm)","Tissue Napkin",
+      "C-Fold Napkin","M-Fold Napkin","Room Freshener",
+      "Room Freshener Godrej","Sunny Phenyl","Red Liquid"
+    ]
+  },
+  essential: {
+    icon: '🧤',
+    label: 'Essentials',
+    items: [
+      "Hand Gloves (Brown)","Hand Gloves (Blue)","Hand Gloves (Yellow)",
+      "Pantry Gloves","Table Dustbin","Supadi","Caddy Basket",
+      "Bucket (18 Ltr)","Bucket (11 Ltr)","Bucket (9 Ltr)",
+      "Drum (100 Ltr)","Drum (60 Ltr)"
+    ]
+  },
+  special: {
+    icon: '⭐',
+    label: 'Special',
+    items: [
+      "Harpic","Colin","Lizol (1 Ltr)","Vim Bar (Big)",
+      "Odopic Powder","Wheel Powder","Steel Wool","Black Hit",
+      "Red Hit","Hit Gel","Drainex Powder","Acid","Spray Bottle",
+      "Bleaching Powder","Scotch-Brite","Silver Polish",
+      "Dettol Antiseptic Liquid (500 ml)","Metal Scrubber"
+    ]
+  },
+  taski: {
+    icon: '🧪',
+    label: 'Taski',
+    items: ["R/1","R/2","R/3","R/4","R/5","R/6"]
+  }
+};
+
+// emoji per category for product cards
+const catEmoji = {
+  mop:['🧹','🪣','🔩','🧹','🪣','🧹','🪣','🧹','🪣','🧹'],
+  brush:['🪣','🪣','🧴','🧴','🪟','🚿','🪟','🧽','🚽','🚽','🚿','🧹','🪶'],
+  bathroom:['🚿','🚽','🧴','🧴','🧴','🌸','🔵','⚪','🚽','🗑️','🗑️','🗑️','🗑️','🗑️','🧻','🧻','🧻','🧻','🧻','📄','📄','🌿','🌿','🧪','🔴'],
+  essential:['🧤','🧤','🧤','🧤','🗑️','🧹','🧺','🪣','🪣','🪣','🛢️','🛢️'],
+  special:['🟡','🔵','🟢','🧼','🧽','🌀','🔩','🪲','🔴','💊','⚗️','⚗️','💦','⬜','🟩','✨','🧴','🔩'],
+  taski:['🧪','🧪','🧪','🧪','🧪','🧪']
+};
+
+function pad(n){return n<10?'0'+n:String(n)}
+
+function renderAll(){
+  Object.entries(catalog).forEach(([key,data])=>{
+    const grid = document.getElementById(key+'-grid');
+    if(!grid) return;
+    grid.innerHTML = data.items.map((name,i)=>`
+      <div class="prod-card" data-cat="${key}" data-name="${name.toLowerCase()}">
+        <div class="prod-img">
+          <span class="prod-num-badge">${pad(i+1)}</span>
+          ${catEmoji[key][i]||data.icon}
+        </div>
+        <div class="prod-info">
+          <div class="prod-name">${name}</div>
+          <span class="prod-cat-tag">${data.label}</span>
+        </div>
+      </div>`).join('');
+  });
+}
+
+function filterCat(cat, btn){
+  // update sidebar
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  document.querySelectorAll('.cat-section').forEach(sec=>{
+    sec.style.display = (cat==='all'||sec.dataset.cat===cat) ? '' : 'none';
+  });
+  document.getElementById('searchInput').value='';
+  updateCount();
+}
+
+function searchProducts(q){
+  q = q.trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.cat-section').forEach(sec=>sec.style.display='');
+  document.querySelectorAll('.prod-card').forEach(card=>{
+    const match = !q || card.dataset.name.includes(q);
+    card.style.display = match ? '' : 'none';
+    if(match) visible++;
+  });
+  // hide empty sections
+  document.querySelectorAll('.cat-section').forEach(sec=>{
+    const anyVisible = [...sec.querySelectorAll('.prod-card')].some(c=>c.style.display!=='none');
+    sec.style.display = anyVisible ? '' : 'none';
+  });
+  document.getElementById('emptyState').style.display = visible===0 ? '' : 'none';
+  document.getElementById('totalCount').textContent = q ? `${visible} result${visible!==1?'s':''}` : '74 Products';
+  // deactivate sidebar
+  if(q) document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+}
+
+function updateCount(){
+  const visible = [...document.querySelectorAll('.prod-card')].filter(c=>c.style.display!=='none').length;
+  document.getElementById('totalCount').textContent = visible+' Products';
+}
+
+document.getElementById('searchInput').addEventListener('input', e=>searchProducts(e.target.value));
+
+renderAll();
+</script>
+</body>
+</html>
